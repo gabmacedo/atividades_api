@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  pessoa_service:
+    build: ./pessoa_service
+    ports:
+      - "5002:5002"
+    volumes:
+      - pessoa_db:/app/database
+    restart: always
+
+  atividades_service:
+    build: ./atividades_service
+    ports:
+      - "5001:5001"
+    environment:
+      - PESSOA_SERVICE_URL=http://pessoa_service:5002/pessoas
+    volumes:
+      - atividade_db:/app/database
+    depends_on:
+      - pessoa_service
+    restart: always
+
+volumes:
+  pessoa_db:
+  atividade_db:
