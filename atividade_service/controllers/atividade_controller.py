@@ -23,7 +23,7 @@ def get_atividades():
 
     return jsonify(atividades), 200
 
-@atividade_bp.route("/atividades/<int:professor_id>", methods=["GET"])
+@atividade_bp.route("/atividades/professor/<int:professor_id>", methods=["GET"])
 def get_atividades_by_professor(professor_id):
     conn = get_connection()
     cursor = conn.cursor()
